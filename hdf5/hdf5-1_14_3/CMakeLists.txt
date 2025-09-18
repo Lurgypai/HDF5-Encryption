@@ -656,6 +656,14 @@ include (${HDF_RESOURCES_DIR}/HDFCompilerFlags.cmake)
 set (CMAKE_MODULE_PATH ${HDF_RESOURCES_DIR} ${CMAKE_MODULE_PATH})
 
 #-----------------------------------------------------------------------------
+# Add encryption libraries
+find_package(GCrypt REQUIRED)
+find_package(GPGError REQUIRED)
+list (APPEND LINK_LIBS GCrypt::GCrypt)
+list (APPEND LINK_LIBS GPGError::GPGError)
+#-----------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------
 # Option to Enable HDFS
 #-----------------------------------------------------------------------------
 option (HDF5_ENABLE_HDFS "Enable HDFS" OFF)
