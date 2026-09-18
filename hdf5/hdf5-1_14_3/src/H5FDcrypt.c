@@ -2681,12 +2681,17 @@ H5FD__crypt_encrypt_page(H5FD_crypt_t *file_ptr, unsigned char *ciphertext_buf,
     else if (file_ptr->fa.cipher == 1)
         cipher = GCRY_CIPHER_TWOFISH;
 
+    else if (file_ptr->fa.cipher == 2)
+        cipher = GCRY_CIPHER_AES128;
+
     else
         HGOTO_ERROR(H5E_VFL, H5E_SYSTEM, FAIL, "Unknown cipher");
 
     /* Checking what mode the file needs for decryption */
     if (file_ptr->fa.mode == 0)
         mode = GCRY_CIPHER_MODE_CBC;
+    if (file_ptr->fa.mode == 1)
+        mode = GCRY_CIPHER_MODE_CTR;
     
     else
         HGOTO_ERROR(H5E_VFL, H5E_SYSTEM, FAIL, "Unknown mode");
