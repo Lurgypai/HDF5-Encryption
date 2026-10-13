@@ -2695,9 +2695,8 @@ H5FD__crypt_encrypt_page(H5FD_crypt_t *file_ptr, unsigned char *ciphertext_buf,
     /* Checking what mode the file needs for decryption */
     if (file_ptr->fa.mode == 0)
         mode = GCRY_CIPHER_MODE_CBC;
-    if (file_ptr->fa.mode == 1)
+    else if (file_ptr->fa.mode == 1)
         mode = GCRY_CIPHER_MODE_CTR;
-    
     else
         HGOTO_ERROR(H5E_VFL, H5E_SYSTEM, FAIL, "Unknown mode");
 
